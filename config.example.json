@@ -1,0 +1,13 @@
+{
+	"slack": {
+		"webhook_url": "",
+		"icon_url": ""
+	},
+	"aoc": {
+		"session": "",
+		"leaderboard_id": null,
+		"year": null,
+		"excluded_members": [],
+    "only_new_solves": true
+	}
+}

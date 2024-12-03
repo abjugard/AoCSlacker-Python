@@ -1,0 +1,17 @@
+[Unit]
+Description=AoCSlacker-Python
+After=network-online.target
+
+[Service]
+User=lowprivuser
+Group=lowprivuser
+Type=oneshot
+WorkingDirectory=/path/to/AoCSlacker-Python/src
+ExecStart=/usr/bin/python bot.py
+TimeoutStartSec=120s
+TimeoutStopSec=120s
+KillMode=process
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
