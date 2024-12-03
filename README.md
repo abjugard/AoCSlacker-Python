@@ -2,6 +2,37 @@
 
 Notify Slack channel with Advent of Code leaderboard, now in glorious Python in true AoC spirit!
 
+## Setup
+Either install the dependancies (`pip install -r requirements.txt`) globally 
+on the machine you intend to run on, or perform the following steps to 
+initialise a Python virtual environment:
+
+* `python -m venv venv`
+* `source venv/bin/activate`
+* `pip install -r requirements.txt`
+
+Then tweak your SystemD unit to use this virtual environment, e.g.
+
+```systemd
+[Unit]
+Description=AoCSlacker-Python
+After=network-online.target
+
+[Service]
+User=lowprivuser
+Group=lowprivuser
+Type=oneshot
+WorkingDirectory=/opt/aocslacker-python/src
+ExecStart=/opt/aocslacker-python/venv/bin/python bot.py
+TimeoutStartSec=120s
+TimeoutStopSec=120s
+KillMode=process
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ## Crontab
 Crontab syntax to run every Monday at 12:00
 
@@ -18,10 +49,10 @@ systemd unit library. Run `systemctl edit AoCSlacker-Python.service` and insert:
 
 ```
 [Service]
-Environment="AOC_YEAR=<AoC contest year>"
-Environment="AOC_LEADERBOARD_ID=<leaderboard ID>"
-Environment="AOC_SESSION=<AoC session cookie>"
-Environment="SLACK_WEBHOOK_URL=<Slack webhook URL>"
+Environment=AOC_YEAR=<AoC contest year> (not necessary, will default to current year)
+Environment=AOC_LEADERBOARD_ID=<leaderboard ID>
+Environment=AOC_SESSION=<AoC session cookie>
+Environment=SLACK_WEBHOOK_URL=<Slack webhook URL>
 ```
 
 Finally run `systemctl enable --now AoCSlacker-Python.timer`
