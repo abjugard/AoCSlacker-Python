@@ -502,3 +502,5 @@ cython_debug/
 ### Project specifics
 config.json
 data/
+infrastructure/*.service
+infrastructure/*.timer
