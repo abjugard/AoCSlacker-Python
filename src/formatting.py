@@ -8,7 +8,7 @@ TABLE_WIDTH = 28
 
 
 def build_leaderboard_table(leaderboard, max_players=25):
-  players = leaderboard.players
+  players = leaderboard.players[:max_players]
 
   w = calculate_leaderboard_widths(players)
   use_global = w.g_score > 0
@@ -26,7 +26,7 @@ def build_leaderboard_table(leaderboard, max_players=25):
   if use_global:
     table.add_column(title='🌐', justify='right', width=w.g_score)
 
-  for p in players[:max_players]:
+  for p in players:
     data = [str(p.position)]
     if use_change:
       data.append(p.change_icon)
