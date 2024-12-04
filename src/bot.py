@@ -33,7 +33,7 @@ def post_solves(leaderboard, ts):
     console.print(f'No solves to post')
   else:
     response = post_message(
-      f'Leaderboard {config.aoc.year}: Day {ts.day} solve times as of {ts.strftime('%H:%M:%S')}',
+      f'Day {ts.day} solve times as of {ts.strftime('%H:%M:%S')}',
       [solve_table]
     )
     console.print(f'Posted {solve_count} solves to Slack at {datetime.now()}')
