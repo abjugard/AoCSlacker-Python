@@ -51,6 +51,8 @@ def post_message(text = None, attachments = None):
     for a in attachments:
       console.print(a)
     body['attachments'] = [{ 'text': f'```{a}```' } for a in attachments]
+  if config.slack.disable:
+    return
   return slack_client.send_dict(body)
 
 
