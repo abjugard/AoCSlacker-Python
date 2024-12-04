@@ -48,8 +48,7 @@ class Player(object):
     self.name = member.name
     self.position = position
     self.is_new = last is None
-    if last is not None:
-      last_player = last.get_player(self.user_id)
+    if last is not None and (last_player := last.get_player(self.user_id)) is not None:
       self.change = last_player.position - position
     else:
       self.change = 0
