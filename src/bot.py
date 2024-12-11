@@ -52,6 +52,7 @@ def post_message(text = None, attachments = None):
       console.print(a)
     body['attachments'] = [{ 'text': f'```{a}```' } for a in attachments]
   if config.slack.disable:
+    print('Posting disabled, skipping')
     return
   return slack_client.send_dict(body)
 
